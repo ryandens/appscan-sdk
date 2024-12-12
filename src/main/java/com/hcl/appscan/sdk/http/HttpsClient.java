@@ -5,6 +5,8 @@
 
 package com.hcl.appscan.sdk.http;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.DataOutputStream;
 import java.io.IOException;
 //import java.net.HttpsURLConnection;
@@ -268,7 +270,7 @@ public class HttpsClient {
 	
 	private HttpsURLConnection makeConnection(String url, Method method,
 			Map<String, String> headerProperties) throws IOException {
-			URL requestURL = new URL(url);
+			URL requestURL = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 
             try {
 	                SSLContext sc = SSLContext.getInstance("TLS");
